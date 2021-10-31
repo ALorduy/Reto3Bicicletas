@@ -5,7 +5,9 @@
 package com.bike.bike.controlador;
 
 import com.bike.bike.modelo.Cliente;
+import com.bike.bike.modelo.ContadorClientes;
 import com.bike.bike.modelo.Reservacion;
+import com.bike.bike.modelo.StatusReservas;
 
 import com.bike.bike.servicios.ServiciosReservacion;
 import java.util.List;
@@ -61,8 +63,21 @@ public class ControlodarReservacion {
     public boolean delete(@PathVariable("id") int reservationId) {
         return servicio.deleteReservation(reservationId);
     }
+   
+    @GetMapping("/report-status")
+    public StatusReservas getReservas(){
+        return servicio.reporteStatusServicio();
+    }
     
-    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+     public List<Reservacion> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+         return servicio.reporteTiempoServicio(dateOne, dateTwo);
+     }
+     
+     @GetMapping("/report-clients")
+     public List<ContadorClientes> getClientes(){
+         return servicio.reporteClientesServicio();
+     }
     
     
 }
